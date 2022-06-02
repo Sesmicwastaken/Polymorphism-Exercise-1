@@ -4,6 +4,7 @@
     {
         public bool IsSQL { get; private set; }
         public bool IsOracle { get; private set; }
+        //public static bool TimedOut { get; private set; }
 
         public void Switch(string dbType)
         {

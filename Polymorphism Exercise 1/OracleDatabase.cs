@@ -11,11 +11,17 @@
 
         public override string OpenConnection()
         {
+            TimeValidation oracle = new TimeValidation();
+
             if (!_isOpen)
             {
                 _isOpen = true;
                 _isClosed = false;
                 return "Opening connection to Oracle Database.";
+            }
+            else if (oracle.TimedOut)
+            {
+                return "Connection timed out";
             }
             else
             {
@@ -25,11 +31,16 @@
 
         public override string CloseConnection()
         {
+            TimeValidation oracle = new TimeValidation();
             if (!_isClosed)
             {
                 _isClosed = true;
                 _isOpen = false;
                 return ("Closing connection to Oracle Databse.");
+            }
+            else if (oracle.TimedOut)
+            {
+                return "Connection timed out";
             }
             else
             {

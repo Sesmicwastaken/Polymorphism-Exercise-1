@@ -20,7 +20,6 @@
             if (TimeTaken >= DbConnection.TimeOut)
             {
                 TimedOut = true;
-                Console.WriteLine("Connection timed out.");
             }
         }
 

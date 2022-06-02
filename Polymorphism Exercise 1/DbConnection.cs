@@ -12,7 +12,7 @@
 
         public static TimeSpan TimeOut
         {
-            get => TimeSpan.Parse("0:01:0");
+            get => TimeSpan.Parse("0:00:30");
         }
 
         public abstract string OpenConnection();

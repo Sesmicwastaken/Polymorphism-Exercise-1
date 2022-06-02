@@ -19,12 +19,17 @@
                     Console.WriteLine("Type \"Open\" for opening the connection or \"Close\" for closing the cnnection with the Database.");
                     string connectionState = Console.ReadLine().Trim().ToLower();
 
+                    TimeValidation sqlTime = new TimeValidation();
+
                     if (connectionState == "open")
                     {
+                        sqlTime.Start();
                         Console.WriteLine(sqlDb.OpenConnection());
                     }
                     else if (connectionState == "close")
                     {
+                        sqlTime.End();
+                        sqlTime.IsValid();
                         Console.WriteLine(sqlDb.CloseConnection());
                     }
                     else

@@ -1,15 +1,15 @@
 ﻿namespace Polymorphism_Exercise_1
 {
-    public class TimeValidation
+    public class Timer
     {
+        private DateTime _startTime;
+        private DateTime _endTime;
+
         private TimeSpan TimeTaken
         {
             get
             {
-                DateTime start = Start();
-                DateTime end = End();
-                TimeSpan time = end - start;
-                return time;
+                return _endTime - _startTime;
             }
         }
 
@@ -25,14 +25,15 @@
 
         public DateTime Start()
         {
-            DateTime StartTime = DateTime.Now;
-            return StartTime;
+            _startTime = DateTime.Now;
+            return _startTime;
         }
 
         public DateTime End()
         {
-            DateTime EndTime = DateTime.Now;
-            return EndTime;
+            _endTime = DateTime.Now;
+
+            return _endTime;
         }
     }
 }

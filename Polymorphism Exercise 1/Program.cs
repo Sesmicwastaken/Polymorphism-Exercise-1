@@ -4,6 +4,8 @@
     {
         private static void Main(string[] args)
         {
+            Timer TimeMesaurement = new Timer();
+
             Console.WriteLine("Provide a connection string.(\"Oracle\" for connecting to Oracle databse and \"SQL\" for connecting to SQL databse.)");
             Console.Write("Input: ");
             string input = Console.ReadLine().Trim().ToLower();
@@ -14,23 +16,23 @@
             if (@switch.IsSQL)
             {
                 SQLDatabse sqlDb = new SQLDatabse(input);
-                while (@switch.IsSQL)
+                TimeMesaurement.Start();
+                while (!TimeMesaurement.TimedOut)
                 {
                     Console.WriteLine("Type \"Open\" for opening the connection or \"Close\" for closing the cnnection with the Database.");
                     string connectionState = Console.ReadLine().Trim().ToLower();
 
-                    TimeValidation sqlTime = new TimeValidation();
-
                     if (connectionState == "open")
                     {
-                        sqlTime.Start();
                         Console.WriteLine(sqlDb.OpenConnection());
+                        TimeMesaurement.End();
+                        TimeMesaurement.IsValid();
                     }
                     else if (connectionState == "close")
                     {
-                        sqlTime.End();
-                        sqlTime.IsValid();
                         Console.WriteLine(sqlDb.CloseConnection());
+                        TimeMesaurement.End();
+                        TimeMesaurement.IsValid();
                     }
                     else
                     {
@@ -41,8 +43,9 @@
             else if (@switch.IsOracle)
             {
                 OracleDatabase oracle = new OracleDatabase(input);
+                TimeMesaurement.Start();
 
-                while (@switch.IsOracle)
+                while (!TimeMesaurement.TimedOut)
                 {
                     Console.WriteLine("Type \"Open\" for opening the connection or \"Close\" for closing the cnnection with the Database.");
                     string connectionState2 = Console.ReadLine().Trim().ToLower();
@@ -50,10 +53,14 @@
                     if (connectionState2 == "open")
                     {
                         Console.WriteLine(oracle.OpenConnection());
+                        TimeMesaurement.End();
+                        TimeMesaurement.IsValid();
                     }
                     else if (connectionState2 == "close")
                     {
                         Console.WriteLine(oracle.CloseConnection());
+                        TimeMesaurement.End();
+                        TimeMesaurement.IsValid();
                     }
                     else
                     {
@@ -61,6 +68,9 @@
                     }
                 }
             }
+
+            Console.WriteLine("\nError: Connection Timed out");
+            return;
         }
     }
 }

@@ -11,16 +11,12 @@
 
         public override string OpenConnection()
         {
-            TimeValidation sql = new TimeValidation();
+            Timer sql = new Timer();
             if (!_isOpen)
             {
                 _isOpen = true;
                 _isClosed = false;
                 return ("Opening connection to SQL Database.");
-            }
-            else if (sql.TimedOut)
-            {
-                return "Connection timed out";
             }
             else
             {
@@ -30,17 +26,13 @@
 
         public override string CloseConnection()
         {
-            TimeValidation sql = new TimeValidation();
+            Timer sql = new Timer();
 
             if (!_isClosed)
             {
                 _isClosed = true;
                 _isOpen = false;
                 return ("Closing connection to SQL Databse.");
-            }
-            else if (sql.TimedOut)
-            {
-                return "Connection timed out";
             }
             else
             {
